@@ -16,9 +16,10 @@ const CounterGame=()=>{
                     history: [...state.history, `-1 (New value: ${state.count -1})`]
                 }
             case 'undo':
+                state.history.pop();
                 return{
-                    count: history[0],
-                    history: [...state.history, state.history[length-2]]
+                    count: 0,
+                    history: state.history
                 }
             case 'reset':
                 return initialState;
@@ -27,7 +28,7 @@ const CounterGame=()=>{
         }
     }
 
-    const [state, dispatch]=useReducer(reducer, initialState);
+    const [state, dispatch]=useReducer(reducer, JSON.parse(localStorage.getItem('memo') || initialState));
     const [number, setNumber]=useState(0);
 
     const incrementBtnRef= useRef(null);
@@ -44,9 +45,13 @@ const CounterGame=()=>{
         dispatch({type: 'decrement'});
     },[]);
 
-    const handleUndo=()=>{
+    const handleUndo=useCallback(()=>{
         dispatch({type: 'undo'});
-    };
+    },[]);
+
+    useEffect(()=>{
+        localStorage.setItem('memo', JSON.stringify(state));
+    },[state])
 
     return(
         <>
@@ -69,9 +74,9 @@ const CounterGame=()=>{
                     <h2>Log</h2>
                     <ul>
                         {
-                            state.history.map((entry, index)=>{
+                            state.history.map((entry, index)=>(
                                 <li key={index} >{entry}</li>
-                            })
+                            ))
                         }
                     </ul>
                 </aside>
