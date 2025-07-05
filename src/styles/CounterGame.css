@@ -1,0 +1,31 @@
+.counter_game{
+  --title:#F5DB99;
+  --text: #F2F1DC;
+  --background_cg: #302C40;
+  --buttonBackground: #1c1c1e;
+  --background-container:#1D1A26;
+
+  background-color: var(--background_cg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  
+  button:hover {
+    background-color: #00bfa6;
+    color: white;
+    transform: scale(1.05);
+    transition: all 0.2s ease-in-out;
+  }
+
+
+  h1{
+    color:var(--title);
+  }
+
+  ul{
+    background-color: var(--background-container);
+  }
+  li{
+    background-color: var(--background_cg);
+  }
+}
+

@@ -1,5 +1,4 @@
 import CounterGame from './CounterGame'
-import './styles/App.css'
 
 function App() {
 
